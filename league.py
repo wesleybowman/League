@@ -1,7 +1,6 @@
 import requests
 import sys
 import pprint
-from PySide import QtGui
 
 def findChamp(champName,rdicts):
     print 'Champ: {0}'.format(champName)
@@ -49,7 +48,6 @@ elif rankedStatus==404:
     print 'Summary'
     sumdicts = summaryText['playerStatSummaries']
 
-    print 'Summary'
     gameTypes = ['Unranked']
 
     for gameType in gameTypes:
@@ -61,12 +59,19 @@ elif rankedStatus==404:
         y =pprint.pprint((item for item in sumdicts if item['playerStatSummaryType'] ==
             gameType).next())
 
-        y
+        #y
         x= (item for item in sumdicts if item['playerStatSummaryType'] ==
                   gameType).next()
 
         for i,v in x.items():
-            print i,v
+            if type(v)==dict:
+                print i,':'
+                for j,k in v.items():
+                    print '\t',j,k
+
+            else:
+                print i,':',v
+
         #for item in sumdicts:
         #    print item
 
